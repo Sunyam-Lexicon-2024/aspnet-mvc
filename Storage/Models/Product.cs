@@ -13,6 +13,7 @@ public class Product
   public string? Name { get; set; }
 
   [Required(ErrorMessage = "A product price is required")]
+  [Range(0, 10000000, ErrorMessage = "Product price must be bewtween 0-1000000")]
   public int Price { get; set; }
 
   [DataType(DataType.Date)]
@@ -27,7 +28,7 @@ public class Product
   [DataType(DataType.Text)]
   [DisplayName("Shelf (Format: 'Shelf-#')")]
   [Required(ErrorMessage = "A shelf is required")]
-  [RegularExpression("^Shelf-[0-9]*$",ErrorMessage ="Naming scheme 'Shelf-#' required")]
+  [RegularExpression("^Shelf-[0-9]*$", ErrorMessage = "Naming scheme 'Shelf-#' required")]
   public string? Shelf { get; set; }
 
   [Required(ErrorMessage = "A product count is required")]
