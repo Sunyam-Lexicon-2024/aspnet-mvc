@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Storage.Data;
 using Storage.Models;
@@ -20,9 +15,19 @@ namespace Storage.Controllers
         }
 
         // GET: Product
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string productName)
         {
-            return View(await _context.Product.ToListAsync());
+            IEnumerable<Product> products;
+            if (!string.IsNullOrEmpty(productName))
+            {
+                products = await FilterByName(productName);
+            }
+            else
+            {
+                products = await _context.Product.ToListAsync();
+            }
+
+            return View(new ProductViewModel(products));
         }
 
         // GET: Product/Details/5
@@ -147,6 +152,24 @@ namespace Storage.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        // GET : Product/List
+        public async Task<IActionResult> List()
+        {
+            var products = await _context.Product.ToListAsync();
+            
+            var productView = new ProductViewModel(products);
+
+            return View(productView);
+        }
+
+        private async Task<IEnumerable<Product>> FilterByName(string name)
+        {
+            Console.WriteLine("name: " + name);
+            var products = await _context.Product.ToListAsync();
+            var filteredProducts = products.Where(p => p.Name == name);
+            return filteredProducts;
         }
 
         private bool ProductExists(int id)
