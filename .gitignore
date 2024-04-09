@@ -1,5 +1,5 @@
 # .NET
-.mono/
+.mono
 **/obj/
 **/bin/
 **/*.db
