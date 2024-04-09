@@ -2,6 +2,7 @@
 .mono/
 **/obj/
 **/bin/
+**/*.db
 
 # Misc
 *.env
