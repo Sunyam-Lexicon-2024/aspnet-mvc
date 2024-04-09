@@ -1,0 +1,7 @@
+# .NET
+.mono/
+**/obj/
+**/bin/
+
+# Misc
+*.env

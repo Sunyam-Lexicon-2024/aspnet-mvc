@@ -16,7 +16,8 @@
 			},
 			"extensions": [
 				"ms-dotnettools.csdevkit",
-				"ms-dotnettools.vscodeintellicode-csharp"
+				"ms-dotnettools.vscodeintellicode-csharp",
+				"qwtel.sqlite-viewer"
 			]
 		}
 	}
