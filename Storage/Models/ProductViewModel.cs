@@ -22,6 +22,6 @@ public class ProductViewModel(IEnumerable<Product> products)
 
   public IEnumerable<Product>? Products => _products;
   public string? SelectedCategory { get; set; }
-  public SelectList? Categories => new(Products!.Select(p => p.Category).Distinct().ToList());
+  public SelectList? Categories { get; set; }
 
 }

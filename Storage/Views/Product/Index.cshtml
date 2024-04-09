@@ -39,7 +39,7 @@
             <th></th>
         </tr>
     </thead>
-    <tbody> @foreach (var item in Model.Products) { <tr>
+    <tbody> @foreach (var item in Model.Products!) { <tr>
             <td> @Html.DisplayFor(modelItem => item.Name) </td>
             <td> @Html.DisplayFor(modelItem => item.Price) </td>
             <td> @Html.DisplayFor(modelItem => item.OrderDate) </td>

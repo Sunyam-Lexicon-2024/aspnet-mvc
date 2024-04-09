@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Storage.Data;
 using Storage.Models;
@@ -15,19 +16,23 @@ namespace Storage.Controllers
         }
 
         // GET: Product
-        public async Task<IActionResult> Index(string productName)
+        public async Task<IActionResult> Index(string selectedCategory, string productName)
         {
             IEnumerable<Product> products;
-            if (!string.IsNullOrEmpty(productName))
+            if (!string.IsNullOrEmpty(selectedCategory) || !string.IsNullOrEmpty(productName))
             {
-                products = await FilterByName(productName);
+                products = await Filter(selectedCategory, productName);
             }
             else
             {
                 products = await _context.Product.ToListAsync();
             }
 
-            return View(new ProductViewModel(products));
+            var productView = new ProductViewModel(products);
+            var allProducts = _context.Product.ToList();
+            var categories = allProducts.Select(p => p.Category).Distinct().ToList();
+            productView.Categories = new SelectList(categories);
+            return View(productView);
         }
 
         // GET: Product/Details/5
@@ -158,17 +163,30 @@ namespace Storage.Controllers
         public async Task<IActionResult> List()
         {
             var products = await _context.Product.ToListAsync();
-            
+
             var productView = new ProductViewModel(products);
 
             return View(productView);
         }
 
-        private async Task<IEnumerable<Product>> FilterByName(string name)
+        private async Task<IEnumerable<Product>> Filter(string? category, string? name)
         {
-            Console.WriteLine("name: " + name);
+            Console.WriteLine("ENTERING FILTER");
+            IEnumerable<Product> filteredProducts;
             var products = await _context.Product.ToListAsync();
-            var filteredProducts = products.Where(p => p.Name == name);
+
+            if (string.IsNullOrEmpty(category))
+            {
+                filteredProducts = products.Where(p => p.Name == name).ToList();
+            }
+            else if (string.IsNullOrEmpty(name))
+            {
+                filteredProducts = products.Where(p => p.Category == category).ToList();
+            }
+            else
+            {
+                filteredProducts = products.Where(p => p.Category == category && p.Name == name).ToList();
+            }
             return filteredProducts;
         }
 
