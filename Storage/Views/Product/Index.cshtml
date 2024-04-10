@@ -1,4 +1,4 @@
-@model ProductViewModel
+@model IEnumerable<ProductListViewModel>
 
 @{
     ViewData["Title"] = "Products";
@@ -14,7 +14,7 @@
         <div class="col-md-8 form-group">
             <div style="display: flex;">
                 <div style="padding: 0 1rem 0 0">
-                <select asp-for="SelectedCategory" asp-items="Model.Categories" class="form-control"></select>
+                <select asp-for="@ProductListViewModel.SelectedCategory" asp-items="@ProductListViewModel.Categories" class="form-control"></select>
                 </div>
                 <div style="padding: 0 1rem 0 0">
                 <input type="text" name="productName" class="form-control" placeholder="Enter product name" />
@@ -38,7 +38,7 @@
             <th></th>
         </tr>
     </thead>
-    <tbody> @foreach (var item in Model.Products!) { <tr>
+    <tbody> @foreach (var item in Model!) { <tr>
             <td> @Html.DisplayFor(modelItem => item.Name) </td>
             <td> @Html.DisplayFor(modelItem => item.Price) </td>
             <td> @Html.DisplayFor(modelItem => item.OrderDate) </td>
@@ -47,7 +47,7 @@
             <td> @Html.DisplayFor(modelItem => item.Count) </td>
             <td> @Html.DisplayFor(modelItem => item.Description) </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> | <a asp-action="Details" asp-route-id="@item.ID">Details</a> | <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                <a asp-action="Edit" asp-route-id="item.ID">Edit</a> | <a asp-action="Details" asp-route-id="item.ID">Details</a> | <a asp-action="Delete" asp-route-id="item.ID">Delete</a>
             </td>
         </tr> } </tbody>
 </table>

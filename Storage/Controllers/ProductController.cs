@@ -28,10 +28,10 @@ namespace Storage.Controllers
                 products = await _context.Product.ToListAsync();
             }
 
-            var productView = new ProductViewModel(products);
+            var productView = products.Select(p => new ProductListViewModel(p));
             var allProducts = _context.Product.ToList();
             var categories = allProducts.Select(p => p.Category).Distinct().ToList();
-            productView.Categories = new SelectList(categories);
+            ProductListViewModel.Categories = new SelectList(categories);
             return View(productView);
         }
 
@@ -64,15 +64,26 @@ namespace Storage.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Price,OrderDate,Category,Shelf,Count,Description")] Product product)
+        public async Task<IActionResult> Create(ProductCreateViewModel productViewModel)
         {
+            Product? productToCreate = null;
             if (ModelState.IsValid)
             {
-                _context.Add(product);
+                productToCreate = new Product()
+                {
+                    Name = productViewModel.Name,
+                    Price = productViewModel.Price,
+                    Count = productViewModel.Count,
+                    Category = productViewModel.Category,
+                    Shelf = productViewModel.Shelf,
+                    Description = productViewModel.Description,
+                    OrderDate = productViewModel.OrderDate,
+                };
+                _context.Add(productToCreate);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            return View(productToCreate);
         }
 
         // GET: Product/Edit/5
@@ -164,9 +175,9 @@ namespace Storage.Controllers
         {
             var products = await _context.Product.ToListAsync();
 
-            var productView = new ProductViewModel(products);
+            var productViewModels = products.Select(p => new ProductListViewModel(product: p));
 
-            return View(productView);
+            return View(productViewModels);
         }
 
         private async Task<IEnumerable<Product>> Filter(string? category, string? name)

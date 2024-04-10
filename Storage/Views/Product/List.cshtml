@@ -1,4 +1,4 @@
-@model ProductViewModel
+@model IEnumerable<ProductListViewModel>
 
 @{
     Layout = null;
@@ -43,7 +43,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Products!) {
+@foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
