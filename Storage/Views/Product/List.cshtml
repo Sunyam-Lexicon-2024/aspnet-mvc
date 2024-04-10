@@ -18,18 +18,27 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
+          <td>
                 @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
+            </td>
+            <td>
                 @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
+            </td>
+            <td>
                 @Html.DisplayNameFor(model => model.Count)
-            </th>
-            <th>
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.Category)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.Shelf)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </td>
+            <td>
                 @Html.DisplayNameFor(model => model.InventoryValue)
-            </th>
+            </td>
             <th></th>
         </tr>
     </thead>
@@ -44,6 +53,15 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Shelf)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.InventoryValue)

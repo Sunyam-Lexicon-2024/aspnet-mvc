@@ -33,7 +33,7 @@ public class Product
   public string? Shelf { get; set; }
 
   [Required(ErrorMessage = "A product count is required")]
-  [DisplayName("In Stock")]
+  [DisplayName("Current Stock")]
   public int Count { get; set; }
 
   [DataType(DataType.Text)]
