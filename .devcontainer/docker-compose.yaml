@@ -7,5 +7,4 @@ services:
       target: development
       dockerfile: .devcontainer/Dockerfile
     command: tail -f /dev/null
-    volumes:
-      - ../:/workspace
+    user: vscode

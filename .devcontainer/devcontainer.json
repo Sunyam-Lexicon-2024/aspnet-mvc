@@ -1,6 +1,8 @@
 {
 	"name": "MVC-1",
-	"image": "mcr.microsoft.com/devcontainers/dotnet:1-8.0-bookworm",
+	"dockerComposeFile": "docker-compose.yaml",
+	"service": "app",
+	"workspaceFolder": "/workspace",
 	"containerEnv": {
 		"HOME": "/home/vscode"
 	},

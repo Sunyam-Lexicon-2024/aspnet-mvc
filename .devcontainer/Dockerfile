@@ -1,12 +1,12 @@
-FROM mcr.microsoft.com/devcontainers/dotnet:1-8.0-bookworm AS build
+FROM mcr.microsoft.com/devcontainers/dotnet:1-8.0-bookworm AS build 
 USER vscode
 WORKDIR /workspace
-COPY . .
-WORKDIR /workspace/Storage
-RUN dotnet tool install --global dotnet-ef
-ENV PATH="$PATH:/root/.dotnet/tools"
-RUN dotnet tool update --global dotnet-ef 
+ADD . .
 
 FROM build AS development
 USER vscode
 WORKDIR /workspace/Storage
+COPY --from=build . .
+RUN \
+    dotnet tool install --global dotnet-ef && \
+    dotnet tool update --global dotnet-ef
