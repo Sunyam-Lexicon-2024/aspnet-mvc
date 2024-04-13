@@ -1,5 +1,5 @@
 {
-	"name": "C# (.NET)",
+	"name": "MVC-1",
 	"image": "mcr.microsoft.com/devcontainers/dotnet:1-8.0-bookworm",
 	"containerEnv": {
 		"HOME": "/home/vscode"
@@ -12,7 +12,7 @@
 	"customizations": {
 		"vscode": {
 			"settings": {
-				"terminal.integrated.defaultProfile.linux": "zsh (2)"
+				"terminal.integrated.defaultProfile.linux": "zsh"
 			},
 			"extensions": [
 				"ms-dotnettools.csdevkit",

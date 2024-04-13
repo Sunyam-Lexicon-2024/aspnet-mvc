@@ -15,8 +15,10 @@ and configure Podman to persist your relevant user namespace (e.g. userns="keep-
 If you do not want to use a Container enviroment you can of course run the application as usual locally.
 
 ```
-# Local development
+# Local development (requires .NET SDK 8.x, dotnet-ef and Microsoft.EntityFrameworkCore.Design )
+
 cd Storage
+dotnet ef database update && \
 dotnet run
 ```
 
