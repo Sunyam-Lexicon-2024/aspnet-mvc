@@ -7,12 +7,12 @@ public class ProductListViewModel
 {
   private int _id;
   private string? _name;
-  private int _price;
-  private int _count;
+  private int? _price;
+  private int? _count;
   private string? _category;
   private string? _shelf;
   private string? _description;
-  private DateTime _orderDate;
+  private DateTime? _orderDate;
   private static SelectList? _categories;
 
   public ProductListViewModel(Product product, SelectList? categories = null)
@@ -24,19 +24,19 @@ public class ProductListViewModel
     _category = product.Category;
     _shelf = product.Shelf;
     _description = product?.Description;
-    _orderDate = product!.OrderDate;
+    _orderDate = product?.OrderDate;
     _categories = categories;
   }
 
   public int ID => _id;
   public string? Name => _name;
-  public int Price => _price;
-  public int Count => _count;
+  public int? Price => _price;
+  public int? Count => _count;
   public string? Category => _category;
   public string? Shelf => _shelf;
   public string? Description => _description;
   [DisplayName("Order Date")]
-  public DateTime OrderDate => _orderDate;
+  public DateTime? OrderDate => _orderDate;
   [DisplayName("Inventory Total Value")]
   public int? InventoryValue => Price * Count;
 

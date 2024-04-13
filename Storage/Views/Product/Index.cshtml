@@ -14,10 +14,10 @@
         <div class="col-md-8 form-group">
             <div style="display: flex;">
                 <div style="padding: 0 1rem 0 0">
-                <select asp-for="@ProductListViewModel.SelectedCategory" asp-items="@ProductListViewModel.Categories" class="form-control"></select>
+                <input type="text" name="productName" class="form-control" placeholder="Enter product name" />
                 </div>
                 <div style="padding: 0 1rem 0 0">
-                <input type="text" name="productName" class="form-control" placeholder="Enter product name" />
+                <select asp-for="@ProductListViewModel.SelectedCategory" asp-items="@ProductListViewModel.Categories" class="form-control"></select>
                 </div>
                 <div style="padding: 0 1rem 0 0">
                 <input type="submit" value="search" class="btn btn-primary form-control" />

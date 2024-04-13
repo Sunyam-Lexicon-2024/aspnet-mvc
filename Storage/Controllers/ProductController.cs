@@ -71,11 +71,11 @@ namespace Storage.Controllers
             {
                 productToCreate = new Product()
                 {
-                    Name = productViewModel.Name,
+                    Name = productViewModel.Name!,
                     Price = productViewModel.Price,
                     Count = productViewModel.Count,
                     Category = productViewModel.Category,
-                    Shelf = productViewModel.Shelf,
+                    Shelf = productViewModel.Shelf!,
                     Description = productViewModel.Description,
                     OrderDate = productViewModel.OrderDate,
                 };
