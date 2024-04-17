@@ -1,0 +1,21 @@
+services:
+
+  app:
+    container_name: mvc-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+      args:
+        - BUILDKIT_INLINE_CACHE=0
+    user: vscode
+    volumes:
+      - .:/workspace
+    entrypoint: [ "/usr/local/bin/entrypoint.sh" ]
+    command: [ "tail", "-f", "/dev/null" ]
+    ports:
+      - 3000:3000
+      - 3001:3001
+    expose:
+      - 3000
+      - 3001
